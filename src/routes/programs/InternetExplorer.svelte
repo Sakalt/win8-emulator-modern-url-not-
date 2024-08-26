@@ -36,39 +36,21 @@
         {/if}
 
         {#if $WebsiteStage != 3}
-            <div class="group center full-height full-width">
-                <div class="command-injection" style="text-align: center;position:relative;right:13px">
-                    {#if $WebsiteStage == 0}
-                        <div class="command">
-                            Unlock the website by running '<span class="emphasis">ovrs authenticate</span>' in the cmd.
-                        </div>
-                    {/if}
-
-                    {#if $WebsiteStage == 1}
-                        <div class="command">Processing...</div>
-                    {/if}
-
-                    {#if $WebsiteStage == 2}
-                        <div class="command">something went wrong rerun the command.</div>
-                    {/if}
-                </div>
+            <!-- 入力フォームとボタンを追加 -->
+            <div class="input-section" style="margin-top: 20px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                <input 
+                    type="text" 
+                    placeholder="Enter URL here" 
+                    bind:value={newIframeSrc} 
+                    style="width: 300px; padding: 10px; margin-bottom: 10px;"
+                />
+                <button 
+                    on:click={updateIframeSrc} 
+                    style="padding: 10px 20px; cursor: pointer;"
+                >
+                    Update URL
+                </button>
             </div>
         {/if}
-
-        <!-- 入力フォームとボタンを追加 -->
-        <div class="input-section" style="margin-top: 20px; text-align: center; display: flex; flex-direction: column; align-items: center;">
-            <input 
-                type="text" 
-                placeholder="Enter URL here" 
-                bind:value={newIframeSrc} 
-                style="width: 300px; padding: 10px; margin-bottom: 10px;"
-            />
-            <button 
-                on:click={updateIframeSrc} 
-                style="padding: 10px 20px; cursor: pointer;"
-            >
-                Update URL
-            </button>
-        </div>
     </div>
 </WindowBase>
