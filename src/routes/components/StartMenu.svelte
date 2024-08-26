@@ -9,16 +9,12 @@
 
     // Elements
     let startmenu_input: HTMLElement;
-
     let startmenu_main_content: HTMLElement;
     let startmenu_side_content: HTMLElement;
-
     let avatar: HTMLElement;
-
     let startmenu_all_programs: HTMLElement;
 
     // Filtration (ComputerPrograms)
-
     let programs_f = ProgramFilter.GetPrograms();
     let program_f_count: number = 0;
     let program_category: string;
@@ -64,20 +60,10 @@
                 if (input_length > 0) {
                     startmenu_all_programs.style.display = 'none';
                     startmenu_side_content.style.display = 'none';
-                    // startmenu_main_content.style.transition = 'width 0.1s';
-                    //startmenu_main_content.style.transition = 'opacity 1s';
-
                     startmenu_main_content.style.width = '100%';
 
                     setTimeout(() => {
-                        //startmenu_all_programs.style.display = 'none';
-                        //startmenu_side_content.style.display = 'none';
-                        //startmenu_main_content.style.opacity = '1';
-                        //startmenu_main_content.style.opacity = '1';
-                        // startmenu_main_content.style.opacity = '1';
-                        /*startmenu_side_content.style.position = "absolute";*/
-                        //startmenu_main_content.style.opacity = "1";
-                        //startmenu_main_content.style.width = "100%";
+                        // Adjust transitions if needed
                     }, 150);
                 } else {
                     // detransition
@@ -85,7 +71,6 @@
                     startmenu_all_programs.style.width = 'var(--startmenu-content-width)';
                     startmenu_main_content.style.width = 'var(--startmenu-content-width)';
                     startmenu_side_content.style.display = 'flex';
-
                     startmenu_side_content.style.opacity = '1';
                     startmenu_side_content.style.transition = 'opacity 1s';
                 }
@@ -114,9 +99,6 @@
                         {#each programs_f as program}
                             <!-- svelte-ignore a11y-click-events-have-key-events -->
                             {#if program.GetId() == 'cmd'}
-                                <!--SMALL DETAIL-->
-                                <!-- svelte-ignore a11y-click-events-have-key-events -->
-                                <!-- svelte-ignore a11y-no-static-element-interactions -->
                                 <div
                                     class="win7-startmenu__group__item"
                                     style="display: flex;font-size:0.8rem;gap:2px;padding-top: 2px;padding: 2px;padding-left:15px;"
@@ -127,8 +109,18 @@
                                     />
                                     <div>{program.GetId()}</div>
                                 </div>
+                            {:else if program.GetId() == 'notepad'}
+                                <div
+                                    class="win7-startmenu__group__item"
+                                    style="display: flex;font-size:0.8rem;gap:2px;padding-top: 2px;padding: 2px;padding-left:15px;"
+                                    on:click={() => TaskManager.AddProcess(program)}
+                                >
+                                    <div
+                                        class="win7-startmenu__group__item--icon x-xxsmall {program.GetIcon().string()}"
+                                    />
+                                    <div>Notepad</div>
+                                </div>
                             {:else}
-                                <!-- svelte-ignore a11y-no-static-element-interactions -->
                                 <div
                                     class="win7-startmenu__group__item"
                                     style="display: flex;font-size:0.8rem;gap:2px;padding-left:12;padding-top: 2px;padding-left:15px;"
@@ -146,7 +138,6 @@
                     {#each programs_f as program}
                         <!-- svelte-ignore a11y-no-static-element-interactions -->
                         {#if program.GetId() == 'ie9'}
-                            <!-- svelte-ignore a11y-click-events-have-key-events -->
                             <div class="win7-startmenu__group__item" on:click={() => TaskManager.AddProcess(program)}>
                                 <div class="win7-startmenu__group__item--icon {program.GetIcon().string()}" />
                                 &nbsp;&nbsp;{program.GetName()}
@@ -155,14 +146,6 @@
                     {/each}
                 {/if}
             </div>
-            <!-- Startmenu items here. 
-            {#each programs_f as program}
-                <div class="win7-startmenu__group__item">
-                    <div class="win7-startmenu__group__item--icon {program.GetIcon().string()}" />
-                    &nbsp;&nbsp;{program.GetName()}
-                </div>
-            {/each}
-            -->
         </div>
 
         <div
@@ -234,10 +217,6 @@
             <div class="aero-button">
                 <button>Help and Support</button>
             </div>
-            <!--
-            <div class="aero-button" style="position:relative;top: 25px;width:fit-content;">
-                <button class="shutdown">NOPE</button>
-            </div>-->
         </div>
     </div>
 </div>
