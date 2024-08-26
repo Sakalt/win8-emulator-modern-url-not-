@@ -12,15 +12,14 @@
 
     let width = 1200;
     let height = 700;
+
     let program: ComputerProgram = ProgramFilter.Find('ie9')!;
+    let iframeSrc: string = "https://example.com"; // 初期URL
+    let newIframeSrc: string = ""; // 入力フォームのバインド変数
 
-    // 初期URL
-    let iframeSrc: string = "https://example.com";
-    // 入力フォーム用のURL
-    let newUrl: string = "";
-
+    // URLを更新する関数
     function updateIframeSrc() {
-        iframeSrc = newUrl;
+        iframeSrc = newIframeSrc;
     }
 
     onMount(() => {});
@@ -56,25 +55,20 @@
             </div>
         {/if}
 
-        {#if $WebsiteStage == 3}
-            <!-- 入力フォームとボタンを追加 -->
-            <div class="url-input">
-                <input 
-                    type="text" 
-                    placeholder="Enter URL here" 
-                    bind:value={newUrl} 
-                    style="width: calc(100% - 110px); padding: 5px;"
-                />
-                <button on:click={updateIframeSrc} style="padding: 5px 10px;">Update URL</button>
-            </div>
-        {/if}
+        <!-- 入力フォームとボタンを追加 -->
+        <div class="input-section" style="margin-top: 20px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+            <input 
+                type="text" 
+                placeholder="Enter URL here" 
+                bind:value={newIframeSrc} 
+                style="width: 300px; padding: 10px; margin-bottom: 10px;"
+            />
+            <button 
+                on:click={updateIframeSrc} 
+                style="padding: 10px 20px; cursor: pointer;"
+            >
+                Update URL
+            </button>
+        </div>
     </div>
 </WindowBase>
-
-<style>
-    .url-input {
-        display: flex;
-        margin: 10px;
-        align-items: center;
-    }
-</style>
