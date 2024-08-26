@@ -7,8 +7,8 @@ const config = {
 
   kit: {
     adapter: adapter({
-      pages: 'build', // 出力ディレクトリを 'build' に設定
-      assets: 'build',
+      pages: 'public', // 出力ディレクトリを 'public' に設定
+      assets: 'public',
       fallback: undefined,
       precompress: false,
       strict: true,
