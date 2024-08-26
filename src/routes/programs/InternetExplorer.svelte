@@ -1,16 +1,21 @@
 <script lang="ts">
     import { ProgramFilter, type ComputerProgram } from '../../programs';
     import WindowBase from '../components/WindowBase.svelte';
+    import WebPagePortfolio from '../components/WebPagePortfolio.svelte';
+
     import '../webpage.css';
     import { onMount } from 'svelte';
+    import { LEET } from '../../effects';
     import { TaskManager, type IProgramManager, CommandManager, WebsiteStage } from '../stores';
+
+    import { CommandStatus } from '../../commands';
 
     let width = 1200;
     let height = 700;
     let program: ComputerProgram = ProgramFilter.Find('ie9')!;
 
-    // 初期URLをBingに設定
-    let iframeSrc: string = "https://www.bing.com";
+    // 初期URL
+    let iframeSrc: string = "https://example.com";
     // 入力フォーム用のURL
     let newUrl: string = "";
 
@@ -32,7 +37,23 @@
         {/if}
 
         {#if $WebsiteStage != 3}
-            <!-- コンテンツがない場合の表示を削除 -->
+            <div class="group center full-height full-width">
+                <div class="command-injection" style="text-align: center;position:relative;right:13px">
+                    {#if $WebsiteStage == 0}
+                        <div class="command">
+                            Unlock the website by running '<span class="emphasis">ovrs authenticate</span>' in the cmd.
+                        </div>
+                    {/if}
+
+                    {#if $WebsiteStage == 1}
+                        <div class="command">Processing...</div>
+                    {/if}
+
+                    {#if $WebsiteStage == 2}
+                        <div class="command">something went wrong rerun the command.</div>
+                    {/if}
+                </div>
+            </div>
         {/if}
 
         {#if $WebsiteStage == 3}
